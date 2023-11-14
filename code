@@ -1,0 +1,234 @@
+#!/bin/bash
+
+Menu(){
+    echo "Select option"
+    echo "r) read top output file"
+    echo "c) average, minimum, and maximum CPU usage"
+    echo "i) average, minimum, and maximum received packets"
+    echo "o) average, minimum, and maximum sent packets"
+    echo "u) commands with the maximum average CPU"
+    echo "a) commands with the maximum average memory usage"
+    echo "b) commands with the minimum average memory usage"
+    echo "e) exit"
+
+echo "choose : "
+read option
+
+case "$option"
+    in
+    "r") readTop;;
+    "c") CpuUsage;;
+    "i") PacketsRec;;
+    "o") PacSent;;
+    "u") MaxCpu;;
+    "a") MaxMem;;
+    "b") echo six;;
+    "e") echo seven;;
+esac
+}
+
+readTop(){
+
+echo "Please input the name of file"
+read File
+
+#check if the exist or not
+    if [ -e "$File" ] 
+    then
+        echo "File Exist" 
+        top -b -n > "$File" 1
+
+    else
+        echo "File does not exist"
+    fi
+Menu
+}
+
+CpuUsage(){
+
+    #initialize variable 
+    Sum=0
+    count=0
+
+    #find the value of Cpu Usage by use the cut and grep operation
+    grep "CPU usage" awal.txt | cut -d "%" -f 1 | cut -d " " -f 3 > Proc.txt
+    #awk '{print $3}' Proc.txt > Proc.txt
+
+    #while loop for getting sum of Cpu Usage
+    while IFS='' read -r LINE || [ -n "${LINE}" ];
+        do
+         count=$((count + 1))
+         echo "The value of Cpu Usage is : $LINE"
+         Sum=$(echo "$Sum + $LINE" | bc)
+    done < Proc.txt
+
+    #Average of whole Cpu Usage
+    echo "sum of Cpu Usage is : $Sum"
+    echo "number of the Cpu Usage we have is : $count"
+    Avg=$(echo "scale=2; $Sum / $count" | bc)
+    echo "The Average is : $Avg"
+
+    #Maximum Cpu Usage
+    echo "Now search for the largest Cpu Usage" 
+    max=$(sort -n Proc.txt | tail -n 1)
+    echo "The Maximum one is :$max"
+
+    #Minimum Cpu Usage
+    echo "Now search for the Smallest Cpu Usage" 
+    min=$(sort -n Proc.txt | head -n 1)
+    echo "The Minimum one is :$min"
+
+Menu
+}
+
+PacketsRec(){
+
+    #initialize variable 
+    SumP=0
+    countP=0
+
+    #extract the number of packets received(in) 
+    grep "Networks" awal.txt | cut -d "/" -f 1 | cut -d " " -f 3 > Proc.txt
+
+    #while loop for getting sum of packets received
+    while IFS='' read -r LINE || [ -n "${LINE}" ];
+        do
+         countP=$((countP + 1))
+         echo "The value is : $LINE"
+         SumP=$(echo "$SumP + $LINE" | bc)
+    done < Proc.txt
+
+    #Average of packets received
+    echo "sum of packets received(in) is : $SumP"
+    echo "number of the packets received we have is : $countP"
+    Avg=$(echo "scale=2; $SumP / $countP" | bc)
+    echo "The Average is : $Avg"
+
+    #Maximum Cpu Usage
+    echo "Now search for the largest packets received(in)" 
+    max=$(sort -n Proc.txt | tail -n 1)
+    echo "The Maximum one is :$max"
+
+    #Minimum Cpu Usage
+    echo "Now search for the Smallest packets received(in)" 
+    min=$(sort -n Proc.txt | head -n 1)
+    echo "The Minimum one is :$min"
+
+Menu
+}
+
+
+PacSent(){
+
+     #initialize variable 
+    SumP=0
+    countP=0
+
+    #extract the number of packets Sent(out) 
+    grep "Networks" awal.txt | cut -d "/" -f 2 | cut -d " " -f 3 > Proc.txt
+
+    #while loop for getting sum of packets Sent
+    while IFS='' read -r LINE || [ -n "${LINE}" ];
+        do
+         countP=$((countP + 1))
+         echo "The value is : $LINE"
+         SumP=$(echo "$SumP + $LINE" | bc)
+    done < Proc.txt
+
+    #Average of packets Sent
+    echo "sum of packets Sent(out) is : $SumP"
+    echo "number of the packets Sent we have is : $countP"
+    Avg=$(echo "scale=2; $SumP / $countP" | bc)
+    echo "The Average is : $Avg"
+
+    #Maximum Cpu Usage
+    echo "Now search for the largest packets Sent(out)" 
+    max=$(sort -n Proc.txt | tail -n 1)
+    echo "The Maximum one is :$max"
+
+    #Minimum Cpu Usage
+    echo "Now search for the Smallest packets Sent(out)" 
+    min=$(sort -n Proc.txt | head -n 1)
+    echo "The Minimum one is :$min"
+
+Menu
+}
+
+MaxCpu(){
+
+    Sum=0
+    count=0
+
+    echo "choose number: "
+    read number
+
+    if     [ -z "${number##*[!0-9]*}" ];
+    then
+            echo "Number Entered is not Integer"
+            echo "choose only integer number: "
+            read number
+    fi
+
+    grep -E '^[0-9]+\s+' awal.txt | cut -c8-29 | awk '{for(i=1; i < NF ; i++) if($i+0==$i) { c++ ; if(c==2)  { print $2 "\t" $i; break } } c=0 }' awal.txt | sort -nrk2 | column -t -s $'\t' | head -$number > Proc.txt
+    awk '{print $2}' Proc.txt > test
+    
+   
+    while IFS='' read -r LINE || [ -n "${LINE}" ];
+        do
+         count=$((count + 1))
+         echo "The value of Cpu Usage is : $LINE"
+         Sum=$(echo "$Sum + $LINE" | bc)
+    done < test
+    
+
+    echo "sum of Cpu Usage is : $Sum"
+    echo "number of the Cpu Usage we have is : $count"
+    Avg=$(echo "scale=2; $Sum / $count" | bc)
+    echo "The Average is : $Avg" 
+    
+    echo "print the highest maximum average CPU usage" 
+    cat Proc.txt
+    
+Menu
+}
+
+MaxMem(){
+
+    Sum=0
+    count=0
+
+    echo "choose number: "
+    read number
+
+    if     [ -z "${number##*[!0-9]*}" ];
+    then
+            echo "Number Entered is not Integer"
+            echo "choose only integer number: "
+            read number
+    fi
+
+
+    grep -E '^[0-9]+\s+' awal.txt | cut -c8-59 | awk '{for(i=1; i < NF ; i++) if($i+0==$i) { c++ ; if(c==2)  { print $2 "\t" $(i+5); break } } c=0 }' awal.txt | sort -rk2 -h | column -t -s $'\t' | head -$number > Proc.txt
+    awk '{print $2}' Proc.txt > test
+    
+    
+    while IFS='' read -r LINE || [ -n "${LINE}" ];
+        do
+         count=$((count + 1))
+         echo "The value of Cpu Usage is : $LINE"
+         Sum=$(echo "$Sum + $LINE" | bc)
+    done < test
+
+    echo "sum of Cpu Usage is : $Sum"
+    echo "number of the Cpu Usage we have is : $count"
+    Avg=$(echo "scale=2; $Sum / $count" | bc)
+    echo "The Average is : $Avg" 
+    
+    echo "print the highest maximum average CPU usage" 
+    cat Proc.txt
+    
+Menu
+
+}
+#MaxMem
+Menu

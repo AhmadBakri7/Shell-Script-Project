@@ -1,0 +1,26 @@
+top - 16:43:03 up  2:35,  0 users,  load average: 0.52, 0.58, 0.59
+Tasks:  19 total,   1 running,  17 sleeping,   1 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+MiB Mem :  16227.9 total,   7814.2 free,   8189.7 used,    224.0 buff/cache
+MiB Swap:  36628.6 total,  36537.8 free,     90.8 used.   7907.5 avail Mem 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+    1 root      20   0   10380    664    616 S   0.0   0.0   0:00.10 init(Ubuntu-20.
+    7 root      20   0   10380    660    524 S   0.0   0.0   0:00.00 init
+  579 bakri     20   0   18368   4020   2948 T   0.0   0.0   0:00.09 pico
+  594 root      20   0   10408    352    300 S   0.0   0.0   0:00.00 SessionLeader
+  595 bakri     20   0   18232   3824   3708 S   0.0   0.0   0:00.42 bash
+  650 root      20   0   10408    360    304 S   0.0   0.0   0:00.00 SessionLeader
+  651 bakri     20   0   10656    676    644 S   0.0   0.0   0:00.01 sh
+  652 bakri     20   0   10656    720    688 S   0.0   0.0   0:00.01 sh
+  657 bakri     20   0   10656    712    680 S   0.0   0.0   0:00.00 sh
+  661 bakri     20   0  944628  59700  30764 S   0.0   0.4   0:10.62 node
+  672 bakri     20   0  632796  29308  16744 S   0.0   0.2   0:00.46 node
+  714 bakri     20   0  843556  25216  16180 S   0.0   0.2   0:00.35 node
+  733 bakri     20   0  995732 107300  99912 S   0.0   0.6   2:07.30 node
+  751 bakri     20   0   10.9g  76816  65712 S   0.0   0.5   0:07.82 node
+  819 root      20   0   10408    360    324 S   0.0   0.0   0:00.01 SessionLeader
+  820 bakri     20   0  595576  25204  13504 S   0.0   0.2   0:01.51 node
+  827 root      20   0   10408    360    324 S   0.0   0.0   0:00.00 SessionLeader
+  828 bakri     20   0  595348  26152  13700 S   0.0   0.2   0:01.77 node
+ 6017 bakri     20   0   18920   2008   1436 R   0.0   0.0   0:00.01 top

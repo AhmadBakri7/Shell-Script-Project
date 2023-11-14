@@ -1,0 +1,16 @@
+total 104
+-rw-r--r-- 1 bakri bakri  1598 Jun  3 17:48 Columns.txt
+-rwxr-xr-x 1 bakri bakri     6 Jul  3 16:37 File
+-rw-r--r-- 1 bakri bakri   104 Jun 19 12:44 Proc.txt
+-rw-r--r-- 1 bakri bakri 45141 Jun 11 16:30 awal.txt
+-rwxr-xr-x 1 bakri bakri  5869 Jun 12 01:45 code
+-rw-r--r-- 1 bakri bakri     0 Jul  3 17:30 file.txt
+lrwxrwxrwx 1 bakri bakri     4 Jul  3 16:35 link -> File
+-rw-r--r-- 1 bakri bakri    44 Jul  3 17:23 sort
+-rw-r--r-- 1 bakri bakri    17 Jul  3 17:17 sort1
+-rw-r--r-- 1 bakri bakri    15 Jul  3 17:18 sort_uneq
+-rwxr-xr-x 1 bakri bakri    67 Jun 11 19:41 test
+-rw-r--r-- 1 bakri bakri  5678 Jun  3 16:39 text.text
+-rw-r--r-- 1 bakri bakri  1892 Jul  3 16:23 text.txt
+-rw-r--r-- 1 bakri bakri    16 Jul  3 17:27 wc.txt
+-rw-r--r-- 1 bakri bakri 20412 Jun  3 16:30 whatever.txt
